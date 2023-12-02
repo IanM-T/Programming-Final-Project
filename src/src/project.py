@@ -22,7 +22,7 @@ def reveal_cell(row, col):
 
 
 def display_board():
-    print("-" * 40)
+    print("-" * 20)
     for row in range(10):
         for col in range(10):
             if uncovered_board[row][col] == -1:
@@ -30,7 +30,7 @@ def display_board():
             else:
                 print(uncovered_board[row][col], end=" ")
         print("")
-    print("-" * 40)
+    print("-" * 20)
 
 
 def check_win():
@@ -55,10 +55,9 @@ def main():
             board[row][col] = 1
             placed_mines += 1
 
-    guesses_left = 25 - total_mines
     game_over = False
 
-    while guesses_left > 0 and not game_over:
+    while not game_over:
         display_board()
 
         row = int(input("Guess a row (1-10): ")) - 1
@@ -70,16 +69,13 @@ def main():
             game_over = True
         else:
             reveal_cell(row, col)
-            guesses_left -= 1
 
         if check_win():
             print("Congratulations! You won the game.")
             game_over = True
 
-    if not game_over:
-        print(f"Better luck next time! ({total_mines} mines)")
-
-    display_board()
+    if game_over:
+        display_board()
 
 if __name__ == "__main__":
-    main()
+  main()
